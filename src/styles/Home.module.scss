@@ -1,0 +1,243 @@
+$main-bk-ground: rgba(48, 48, 48, 1);
+$date-color: rgba(171, 171, 171, 1);
+$main-txt-color: rgba(255, 255, 255, 1);
+$city-country-txt-color: rgba(136, 136, 136, 1);
+$border-filter-color: rgba(255, 255, 255, 1);
+$active-filter-bk-ground: rgba(255, 255, 255, 1);
+$active-filter-txt-color: rgba(48, 48, 48, 1);
+$main-font-family: 'Montserrat';
+$date-font-style: italic;
+$main-font-style: normal;
+$date-font-size: 12px;
+$btnshow-font-size: 14px;
+
+$city-country-txt-size: 16px;
+$title-txt-size: 18px;
+$modal-link-size: 14px;
+$modal-hidden-title-txt-size: 16px;
+$modal-hidden-txt-size: 14px;
+$modal-countrycity-txt-size: 22px;
+$modal-title-txt-size: 28px;
+$btnreset-font-size: 10px;
+$date-font-weight: 500;
+$main-font-weight: 700;
+$modal-hidden-font-weight: 400;
+$header-font-size: 36px;
+$counter-font-size: 28px;
+$btnshow-bk-ground: rgba(59, 59, 59, 1);
+$btnshow-color: rgba(165, 222, 219, 1);
+$main-text-transform: uppercase;
+$modal-countrycity-txt-color: rgba(136, 136, 136, 1);
+
+$modal-link-color: rgba(43, 133, 128, 1);
+$modal-hidden-container-bk-ground: rgba(43, 133, 128, 1);
+$modal-hidden-application-color: rgba(229, 229, 229, 1);
+
+
+
+$bp-tablet: 768px;
+$bp-phone: 320px;
+
+@use 'sass:map';
+$counter-color: (
+  'counter': rgba(43, 133, 128, 1),
+);
+@mixin for-tablet {
+  @media (min-width: $bp-tablet) {
+    @content;
+  }
+}
+
+.main_container {
+  background-color: $main-bk-ground;
+  width: auto;
+
+  padding: 1rem 3rem 0.5rem 3rem;
+  margin: 5rem 5.4rem 2rem 3.7rem;
+  border-radius: 1.8rem;
+}
+
+.header .counter {
+  color: map.get($counter-color, 'counter');
+  display: inline-block;
+}
+.header {
+  color: $main-txt-color;
+  font-family: $main-font-family;
+  font-style: $main-font-style;
+  font-weight: $main-font-weight;
+  font-size: $header-font-size;
+}
+
+.counter {
+  font-family: $main-font-family;
+  font-size: $counter-font-size;
+  font-weight: $main-font-weight;
+}
+
+.resetBtn {
+  color: $main-txt-color;
+  font-size: $btnreset-font-size;
+  text-transform: $main-text-transform;
+  
+  float: right;
+  width: 82px;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  
+}
+.showBtn {
+  margin: 0 auto;
+  display: block;
+  background-color: $btnshow-bk-ground;
+  padding: 20px 50px;
+  color: $btnshow-color;
+  font-size: $btnshow-font-size;
+  font-family: $main-font-family;
+  font-style: $main-font-style;
+  font-weight: $main-font-weight;
+  position: sticky;
+  margin-top: 15px;
+}
+
+.cards {
+  width: 200px;
+  max-height: 80%;
+
+  text-align: left;
+  overflow: hidden;
+  border: none;
+  border-radius: none;
+}
+
+.date {
+  font-family: $main-font-family;
+  font-style: $date-font-style;
+  font-weight: $date-font-weight;
+  font-size: $date-font-size;
+  color: $date-color;
+  float: right;
+
+  display: flex;
+}
+
+.modalLink {
+  padding-left: 0px;
+  color: $modal-link-color;
+  font-size: $modal-link-size;
+  font-weight: $main-font-weight;
+  font-family: $main-font-family;
+}
+
+.countryCityTitle {
+  color: $city-country-txt-color;
+  font-weight: $main-font-weight;
+  font-style: $main-font-style;
+  font-family: $main-font-family;
+}
+
+.titleStyle {
+  color: $main-bk-ground;
+  font-size: $title-txt-size;
+  font-weight: $main-font-weight;
+  font-style: $main-font-style;
+  font-family: $main-font-family;
+}
+
+.uniksBtns {
+  padding: 11px 10px;
+  appearance: none;
+  background-color: $main-bk-ground;
+  border: 1px solid $border-filter-color;
+  margin: 1px;
+  margin-right: 2px;
+  text-transform: $main-text-transform;
+  color: $main-txt-color;
+  font-size: $btnshow-font-size;
+  font-weight: $main-font-weight;
+  cursor: pointer;
+}
+
+.uniksBtns:hover {
+  background-color: $active-filter-bk-ground;
+  color: $active-filter-txt-color;
+}
+
+.closeBtnModal {
+  float: right;
+  cursor: pointer;
+}
+
+.filterContainer {
+  display: inline-block;
+  justify-content:flex-start;
+  
+}
+
+.modalHiddenContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  height: 100%;
+  background-color: $modal-hidden-container-bk-ground;
+  flex-grow: 1;
+  color: $main-txt-color;
+  padding: 40px;
+  
+  font-size: $modal-hidden-title-txt-size;
+  font-family: $main-font-family;
+  font-style: $main-font-style;
+  font-weight: $main-font-weight;  
+
+}
+
+.filterBtnContainer {
+  display: flex;
+  float: right;    
+}
+
+.modalHiddentxt {
+  font-family: $main-font-family;
+  font-size: $modal-hidden-txt-size;
+  color: $main-txt-color;
+  font-weight: $modal-hidden-font-weight;
+}
+
+.modalHiddenDescripTitle {
+  font-family: $main-font-family;
+  font-weight: $main-font-weight;
+  font-size: $modal-hidden-title-txt-size;
+}
+
+.modalHiddenDescriptxt {
+  font-weight: $modal-hidden-font-weight;
+  font-size: $modal-hidden-txt-size;
+  font-family: $main-font-family;
+}
+
+.modalApplicationTitle {
+  display: inline-block;
+  background-color: $modal-hidden-container-bk-ground;
+  color: $modal-hidden-application-color;
+  text-transform: $main-text-transform;
+  padding: 11px 10px;
+  font-size: $modal-hidden-txt-size;
+  font-weight: $main-font-weight;
+  font-family: $main-font-family;
+  
+}
+
+.modalCountryCity {
+  font-size: $modal-countrycity-txt-size;
+  color: $modal-countrycity-txt-color;
+  font-weight: $main-font-weight;
+  font-family: $main-font-family;
+}
+
+.modalTitletxt {
+  font-weight: $main-font-weight;
+  font-family: $main-font-family;
+  font-size: $modal-title-txt-size;
+}

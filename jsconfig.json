@@ -4,5 +4,11 @@
     "paths": {
       "@/*": ["./src/*"]
     }
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0
   }
 }
+
+
