@@ -1,5 +1,5 @@
-import styles from '../styles/globals.css';
-import store from '../store/store';
+import styles from '@/styles/globals.css';
+import store from '@/store/store';
 import { Provider } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material';
 

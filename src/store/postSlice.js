@@ -14,7 +14,7 @@ const postSlice = createSlice({
     selectApplication(state, action) {
       state.selectedApplications = [
         ...state.selectedApplications,
-        action.payload,
+        ...action.payload,
       ];
     },
     resetApplication(state, action) {

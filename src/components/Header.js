@@ -1,7 +1,7 @@
 import { applicationSelector } from '@/store/postSlice';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styles from '../styles/Home.module.scss';
+import styles from '@/styles/Home.module.scss';
 
 const Header = ({ filter }) => {
   const { data } = useSelector(state => state.posts);
@@ -11,9 +11,7 @@ const Header = ({ filter }) => {
     <div>
       <h1 className={styles.header}>
         Заголовок
-        <p className={styles.counter}>
-          ({filter ? filteredItems.length : data.length})
-        </p>
+        <p className={styles.counter}>({filteredItems.length})</p>
       </h1>
     </div>
   );

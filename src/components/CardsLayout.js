@@ -2,15 +2,14 @@ import { Button, Grid, Card } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Typography, Box } from '@mui/material';
 import React from 'react';
-import ModalCard from './ModalCard';
+import ModalCard from '@/components/ModalCard';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../styles/Home.module.scss';
+import styles from '@/styles/Home.module.scss';
 import { applicationSelector } from '@/store/postSlice';
 import moment from 'moment/moment';
 
 const CardsLayout = ({ filter }) => {
-  const { data } = useSelector(state => state.posts);
   const filteredItems = useSelector(applicationSelector);
   const [showAll, setShowAll] = useState(false);
   const [showAllFiltered, setShowAllFiltered] = useState(false);
@@ -20,7 +19,7 @@ const CardsLayout = ({ filter }) => {
     setShowAll(!showAll);
     setShowAllFiltered(!showAllFiltered);
   };
-  const dataDisplay = showAll ? data : data.slice(0, 8);
+  const dataDisplay = showAll ? filteredItems : filteredItems.slice(0, 8);
   const dataFilteredDisplay = showAllFiltered
     ? filteredItems
     : filteredItems.slice(0, 8);
@@ -29,18 +28,24 @@ const CardsLayout = ({ filter }) => {
     <>
       <main>
         <div>
-          <Grid container rowSpacing={1} columnSpacing={2} >
+          <Grid container rowSpacing={3} columnSpacing={2}>
             {(filter ? dataFilteredDisplay : dataDisplay).map(item => (
               <Grid
                 item
                 xs={12}
                 sm={3}
                 md={3}
-                
+                lg={3}
                 key={item.id}
                 className={styles.cards}
               >
-                <Card sx={{p:'20px 16px', width: '100%' ,height: '100%', borderRadius:'0%'}}
+                <Card
+                  sx={{
+                    p: '20px 1rem',
+                    width: '100%',
+                    height: '90%',
+                    borderRadius: '0%',
+                  }}
                 >
                   {item.city ? (
                     <Typography className={styles.countryCityTitle}>
@@ -48,9 +53,13 @@ const CardsLayout = ({ filter }) => {
                       {item.country}, {item.city}
                     </Typography>
                   ) : (
-                    <Typography className={styles.countryCityTitle}>{item.country}</Typography>
+                    <Typography className={styles.countryCityTitle}>
+                      {item.country}
+                    </Typography>
                   )}
-                  <Typography className={styles.titleStyle}>{item.title}</Typography>
+                  <Typography className={styles.titleStyle}>
+                    {item.title}
+                  </Typography>
 
                   <ModalCard
                     id={item.id}
@@ -85,7 +94,7 @@ const CardsLayout = ({ filter }) => {
           </Grid>
 
           {(filter && filteredItems.length > 7) ||
-          (!filter && data.length > 7) ? (
+          (!filter && filteredItems.length > 7) ? (
             <Button className={styles.showBtn} onClick={handleBtn}>
               {showAll || showAllFiltered ? 'Свернуть все' : 'Показать все'}
             </Button>

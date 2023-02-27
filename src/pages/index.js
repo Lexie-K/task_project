@@ -2,33 +2,40 @@ import Header from '@/components/Header';
 import FilterCategory from '@/components/FilterCategory';
 import CardsLayout from '@/components/CardsLayout';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { resetApplication, selectApplication } from '@/store/postSlice';
-
+import { useEffect, useState } from 'react';
+import {
+  applicationSelector,
+  resetApplication,
+  selectApplication,
+} from '@/store/postSlice';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import data from '../data/data.json';
 import { useTransition } from 'react';
-import styles from '../styles/Home.module.scss';
+import styles from '@/styles/Home.module.scss';
+import Head from 'next/head';
 
-export default function Home({data}) {
+export default function Home({ data }) {
   const [filter, setFilter] = useState(false);
   const [currentFilter, setCurrentFilter] = useState('');
   const [isPending, startTransition] = useTransition();
-  
-  const router = useRouter();
-  
-  const dispatch = useDispatch();
-  
-  const applicationChangeHandler = (application) => {
-    setCurrentFilter(application);
-    const id = router.query;
-    router.push( 
-      {
-        pathname: router.pathname, 
-        query: {id},
-      },)
+  // const data = useSelector(applicationSelector);
+  const selectedApplications = useSelector(
+    state => state.posts.selectedApplications
+  );
 
-    startTransition(() => dispatch(selectApplication(application)));
+  const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  const applicationChangeHandler = application => {
+    setCurrentFilter(application);
+    router.push({
+      pathname: router.pathname,
+      query: { application: [...selectedApplications, application].join(',') },
+    });
+
+    startTransition(() => dispatch(selectApplication([application])));
     setFilter(true);
   };
   const applicationResetHandler = application => {
@@ -37,6 +44,10 @@ export default function Home({data}) {
 
   return (
     <div className={styles.main_container}>
+      <Head>
+        <title>Task_Project</title>
+      </Head>
+
       <Header filter={filter} />
       <FilterCategory
         currentFilter={currentFilter}
@@ -49,6 +60,18 @@ export default function Home({data}) {
   );
 }
 
-export async function getServerSideProps() {
-  return { props: data };
-}
+export const getStaticProps = async context => {
+  const params = new URLSearchParams(
+    global.window ? window.document.location.search : undefined
+  );
+  const applications = params.get('application');
+  if (applications) {
+    dispatch(selectApplication(applications.split(',')));
+  }
+
+  return {
+    props: {
+      data: data,
+    },
+  };
+};

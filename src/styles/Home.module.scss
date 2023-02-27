@@ -8,22 +8,22 @@ $active-filter-txt-color: rgba(48, 48, 48, 1);
 $main-font-family: 'Montserrat';
 $date-font-style: italic;
 $main-font-style: normal;
-$date-font-size: 12px;
-$btnshow-font-size: 14px;
+$date-font-size: 0.75rem;
+$btnshow-font-size: 0.875rem;
 
-$city-country-txt-size: 16px;
-$title-txt-size: 18px;
-$modal-link-size: 14px;
-$modal-hidden-title-txt-size: 16px;
-$modal-hidden-txt-size: 14px;
-$modal-countrycity-txt-size: 22px;
-$modal-title-txt-size: 28px;
-$btnreset-font-size: 10px;
+$city-country-txt-size: 1rem;
+$title-txt-size: 1.125rem;
+$modal-link-size: 0.875rem;
+$modal-hidden-title-txt-size: 1rem;
+$modal-hidden-txt-size: 0.875rem;
+$modal-countrycity-txt-size: 1.375rem;
+$modal-title-txt-size: 1.75rem;
+$btnreset-font-size: 0.625rem;
 $date-font-weight: 500;
 $main-font-weight: 700;
 $modal-hidden-font-weight: 400;
-$header-font-size: 36px;
-$counter-font-size: 28px;
+$header-font-size: 2rem;
+$counter-font-size: 1.75rem;
 $btnshow-bk-ground: rgba(59, 59, 59, 1);
 $btnshow-color: rgba(165, 222, 219, 1);
 $main-text-transform: uppercase;
@@ -33,8 +33,7 @@ $modal-link-color: rgba(43, 133, 128, 1);
 $modal-hidden-container-bk-ground: rgba(43, 133, 128, 1);
 $modal-hidden-application-color: rgba(229, 229, 229, 1);
 
-
-
+$bp-desktop: 1200px;
 $bp-tablet: 768px;
 $bp-phone: 320px;
 
@@ -42,19 +41,21 @@ $bp-phone: 320px;
 $counter-color: (
   'counter': rgba(43, 133, 128, 1),
 );
+
 @mixin for-tablet {
   @media (min-width: $bp-tablet) {
     @content;
   }
 }
-
-.main_container {
-  background-color: $main-bk-ground;
-  width: auto;
-
-  padding: 1rem 3rem 0.5rem 3rem;
-  margin: 5rem 5.4rem 2rem 3.7rem;
-  border-radius: 1.8rem;
+@mixin for-phone {
+  @media (min-width: $bp-phone) {
+    @content;
+  }
+}
+@mixin for-desktop {
+  @media (min-width: $bp-desktop) {
+    @content;
+  }
 }
 
 .header .counter {
@@ -63,31 +64,50 @@ $counter-color: (
 }
 .header {
   color: $main-txt-color;
-  font-family: $main-font-family;
   font-style: $main-font-style;
   font-weight: $main-font-weight;
   font-size: $header-font-size;
 }
 
 .counter {
-  font-family: $main-font-family;
   font-size: $counter-font-size;
   font-weight: $main-font-weight;
+}
+
+.main_container {
+  background-color: $main-bk-ground;
+  min-width: 25rem;
+
+  padding: 1rem 3rem 0.5rem 3rem;
+  margin: 5rem 5.4rem 2rem 3.7rem;
+  border-radius: 1.8rem;
+}
+
+@media (max-width: $bp-phone) {
+  .main_container {
+    background-color: $main-bk-ground;
+    max-width: 320px;
+    min-height: 100%;
+
+    // padding: 1rem 3rem 0.5rem 3rem;
+    // margin: 5rem 5.4rem 2rem 3.7rem;
+    border-radius: 1.8rem;
+  }
 }
 
 .resetBtn {
   color: $main-txt-color;
   font-size: $btnreset-font-size;
   text-transform: $main-text-transform;
-  
-  float: right;
-  width: 82px;
+  transform: translate(-95%, -10%);
+
+  max-width: 80px;
   appearance: none;
   background: none;
   border: none;
   cursor: pointer;
-  
 }
+
 .showBtn {
   margin: 0 auto;
   display: block;
@@ -95,17 +115,13 @@ $counter-color: (
   padding: 20px 50px;
   color: $btnshow-color;
   font-size: $btnshow-font-size;
-  font-family: $main-font-family;
   font-style: $main-font-style;
   font-weight: $main-font-weight;
   position: sticky;
-  margin-top: 15px;
 }
 
 .cards {
-  width: 200px;
-  max-height: 80%;
-
+  min-width: 12.5rem;
   text-align: left;
   overflow: hidden;
   border: none;
@@ -119,8 +135,6 @@ $counter-color: (
   font-size: $date-font-size;
   color: $date-color;
   float: right;
-
-  display: flex;
 }
 
 .modalLink {
@@ -151,8 +165,8 @@ $counter-color: (
   appearance: none;
   background-color: $main-bk-ground;
   border: 1px solid $border-filter-color;
-  margin: 1px;
-  margin-right: 2px;
+  margin: 0.2rem;
+  margin-right: 0.5rem;
   text-transform: $main-text-transform;
   color: $main-txt-color;
   font-size: $btnshow-font-size;
@@ -172,30 +186,45 @@ $counter-color: (
 
 .filterContainer {
   display: inline-block;
-  justify-content:flex-start;
-  
+  justify-content: flex-start;
 }
 
+.mainFilterContainer {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: $bp-tablet) {
+  .filterContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .mainFilterContainer {
+    display: inline-block;
+  }
+  .resetBtn {
+    transform: none;
+    float: right;
+  }
+  .imageFilter {
+    text-align: right;
+  }
+}
 .modalHiddenContainer {
   display: flex;
   justify-content: space-between;
+  gap: 0.625rem;
   align-items: baseline;
-  height: 100%;
+  max-height: 100%;
+
   background-color: $modal-hidden-container-bk-ground;
-  flex-grow: 1;
   color: $main-txt-color;
-  padding: 40px;
-  
+  padding: 1.25rem;
+
   font-size: $modal-hidden-title-txt-size;
   font-family: $main-font-family;
   font-style: $main-font-style;
-  font-weight: $main-font-weight;  
-
-}
-
-.filterBtnContainer {
-  display: flex;
-  float: right;    
+  font-weight: $main-font-weight;
 }
 
 .modalHiddentxt {
@@ -226,7 +255,6 @@ $counter-color: (
   font-size: $modal-hidden-txt-size;
   font-weight: $main-font-weight;
   font-family: $main-font-family;
-  
 }
 
 .modalCountryCity {
