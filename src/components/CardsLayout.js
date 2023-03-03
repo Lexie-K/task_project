@@ -28,14 +28,13 @@ const CardsLayout = ({ filter }) => {
     <>
       <main>
         <div>
-          <Grid container rowSpacing={3} columnSpacing={2}>
+          <Grid container rowSpacing={5} columnSpacing={9}>
             {(filter ? dataFilteredDisplay : dataDisplay).map(item => (
               <Grid
                 item
                 xs={12}
                 sm={3}
                 md={3}
-                lg={3}
                 key={item.id}
                 className={styles.cards}
               >
@@ -45,6 +44,7 @@ const CardsLayout = ({ filter }) => {
                     width: '100%',
                     height: '90%',
                     borderRadius: '0%',
+                    background: 'rgba(229, 229, 229, 1)',
                   }}
                 >
                   {item.city ? (
@@ -95,9 +95,11 @@ const CardsLayout = ({ filter }) => {
 
           {(filter && filteredItems.length > 7) ||
           (!filter && filteredItems.length > 7) ? (
-            <Button className={styles.showBtn} onClick={handleBtn}>
-              {showAll || showAllFiltered ? 'Свернуть все' : 'Показать все'}
-            </Button>
+            <div className={styles.showBtnBorders}>
+              <Button className={styles.showBtn} onClick={handleBtn}>
+                {showAll || showAllFiltered ? 'Свернуть все' : 'Показать все'}
+              </Button>
+            </div>
           ) : undefined}
         </div>
       </main>

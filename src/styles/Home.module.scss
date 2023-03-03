@@ -5,7 +5,6 @@ $city-country-txt-color: rgba(136, 136, 136, 1);
 $border-filter-color: rgba(255, 255, 255, 1);
 $active-filter-bk-ground: rgba(255, 255, 255, 1);
 $active-filter-txt-color: rgba(48, 48, 48, 1);
-$main-font-family: 'Montserrat';
 $date-font-style: italic;
 $main-font-style: normal;
 $date-font-size: 0.75rem;
@@ -22,7 +21,7 @@ $btnreset-font-size: 0.625rem;
 $date-font-weight: 500;
 $main-font-weight: 700;
 $modal-hidden-font-weight: 400;
-$header-font-size: 2rem;
+$header-font-size: 2.25rem;
 $counter-font-size: 1.75rem;
 $btnshow-bk-ground: rgba(59, 59, 59, 1);
 $btnshow-color: rgba(165, 222, 219, 1);
@@ -32,15 +31,11 @@ $modal-countrycity-txt-color: rgba(136, 136, 136, 1);
 $modal-link-color: rgba(43, 133, 128, 1);
 $modal-hidden-container-bk-ground: rgba(43, 133, 128, 1);
 $modal-hidden-application-color: rgba(229, 229, 229, 1);
+$counter-color: rgba(43, 133, 128, 1);
 
 $bp-desktop: 1200px;
 $bp-tablet: 768px;
 $bp-phone: 320px;
-
-@use 'sass:map';
-$counter-color: (
-  'counter': rgba(43, 133, 128, 1),
-);
 
 @mixin for-tablet {
   @media (min-width: $bp-tablet) {
@@ -59,38 +54,34 @@ $counter-color: (
 }
 
 .header .counter {
-  color: map.get($counter-color, 'counter');
   display: inline-block;
 }
 .header {
   color: $main-txt-color;
-  font-style: $main-font-style;
-  font-weight: $main-font-weight;
   font-size: $header-font-size;
+  font-weight: $main-font-weight;
 }
 
 .counter {
   font-size: $counter-font-size;
-  font-weight: $main-font-weight;
+  font-weight: 700;
+  color: $counter-color;
+  font-style: bold;
 }
 
 .main_container {
   background-color: $main-bk-ground;
-  min-width: 25rem;
-
-  padding: 1rem 3rem 0.5rem 3rem;
-  margin: 5rem 5.4rem 2rem 3.7rem;
+  padding: 2.5rem 3.75rem 1rem 4.75rem;
+  margin: 4rem 5.125rem 1rem 2.6875rem;
   border-radius: 1.8rem;
+  min-width: 25rem;
 }
 
 @media (max-width: $bp-phone) {
   .main_container {
     background-color: $main-bk-ground;
     max-width: 320px;
-    min-height: 100%;
-
-    // padding: 1rem 3rem 0.5rem 3rem;
-    // margin: 5rem 5.4rem 2rem 3.7rem;
+    max-height: 100%;
     border-radius: 1.8rem;
   }
 }
@@ -109,10 +100,10 @@ $counter-color: (
 }
 
 .showBtn {
-  margin: 0 auto;
+  margin: 0px 1px;
   display: block;
   background-color: $btnshow-bk-ground;
-  padding: 20px 50px;
+  padding: 17px 52px 16px 50px;
   color: $btnshow-color;
   font-size: $btnshow-font-size;
   font-style: $main-font-style;
@@ -120,20 +111,37 @@ $counter-color: (
   position: sticky;
 }
 
+.showBtnBorders {
+  background-image: url('../../assets/btnlines.png');
+  background-repeat: no-repeat;
+  padding: 10px 10px;
+  margin: 1rem auto;
+  position: sticky;
+  max-width: 300px;
+}
+
 .cards {
-  min-width: 12.5rem;
+  min-width: 15.5rem;
+
   text-align: left;
   overflow: hidden;
   border: none;
   border-radius: none;
+  vertical-align: top;
+  font-weight: $main-font-weight;
+  font-size: $title-txt-size;
 }
 
 .date {
-  font-family: $main-font-family;
   font-style: $date-font-style;
   font-weight: $date-font-weight;
   font-size: $date-font-size;
   color: $date-color;
+
+  padding-right: 0.094rem;
+  padding-top: 0.25rem;
+  max-width: 12.188rem;
+  white-space: nowrap;
   float: right;
 }
 
@@ -142,14 +150,13 @@ $counter-color: (
   color: $modal-link-color;
   font-size: $modal-link-size;
   font-weight: $main-font-weight;
-  font-family: $main-font-family;
+  display: flex;
 }
 
 .countryCityTitle {
   color: $city-country-txt-color;
   font-weight: $main-font-weight;
   font-style: $main-font-style;
-  font-family: $main-font-family;
 }
 
 .titleStyle {
@@ -157,16 +164,16 @@ $counter-color: (
   font-size: $title-txt-size;
   font-weight: $main-font-weight;
   font-style: $main-font-style;
-  font-family: $main-font-family;
+  font-style: bold;
 }
 
 .uniksBtns {
-  padding: 11px 10px;
+  padding: 0.688rem 0.625rem;
   appearance: none;
   background-color: $main-bk-ground;
   border: 1px solid $border-filter-color;
-  margin: 0.2rem;
-  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 1rem;
   text-transform: $main-text-transform;
   color: $main-txt-color;
   font-size: $btnshow-font-size;
@@ -174,7 +181,7 @@ $counter-color: (
   cursor: pointer;
 }
 
-.uniksBtns:hover {
+.uniksBtnsFocus {
   background-color: $active-filter-bk-ground;
   color: $active-filter-txt-color;
 }
@@ -182,11 +189,15 @@ $counter-color: (
 .closeBtnModal {
   float: right;
   cursor: pointer;
+  padding-top: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 .filterContainer {
   display: inline-block;
   justify-content: flex-start;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .mainFilterContainer {
@@ -209,41 +220,49 @@ $counter-color: (
   .imageFilter {
     text-align: right;
   }
+  .modalHiddenContainer {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }
 .modalHiddenContainer {
   display: flex;
   justify-content: space-between;
-  gap: 0.625rem;
+  gap: 5.25rem;
   align-items: baseline;
   max-height: 100%;
+  max-width: 100%;
 
   background-color: $modal-hidden-container-bk-ground;
   color: $main-txt-color;
-  padding: 1.25rem;
+  padding: 2rem 8.875rem 1.938rem 2.5rem;
 
   font-size: $modal-hidden-title-txt-size;
-  font-family: $main-font-family;
   font-style: $main-font-style;
   font-weight: $main-font-weight;
 }
 
 .modalHiddentxt {
-  font-family: $main-font-family;
   font-size: $modal-hidden-txt-size;
   color: $main-txt-color;
   font-weight: $modal-hidden-font-weight;
 }
 
 .modalHiddenDescripTitle {
-  font-family: $main-font-family;
   font-weight: $main-font-weight;
   font-size: $modal-hidden-title-txt-size;
+  padding-left: 2.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .modalHiddenDescriptxt {
   font-weight: $modal-hidden-font-weight;
   font-size: $modal-hidden-txt-size;
-  font-family: $main-font-family;
+  text-align: left;
+  padding-left: 2.5rem;
+  padding-right: 2.563rem;
+  padding-bottom: 2.688rem;
 }
 
 .modalApplicationTitle {
@@ -251,21 +270,26 @@ $counter-color: (
   background-color: $modal-hidden-container-bk-ground;
   color: $modal-hidden-application-color;
   text-transform: $main-text-transform;
-  padding: 11px 10px;
+  padding: 0.688rem 0.625rem;
+  margin-top: 2.5rem;
+  margin-left: 2.5rem;
   font-size: $modal-hidden-txt-size;
   font-weight: $main-font-weight;
-  font-family: $main-font-family;
 }
 
 .modalCountryCity {
   font-size: $modal-countrycity-txt-size;
   color: $modal-countrycity-txt-color;
   font-weight: $main-font-weight;
-  font-family: $main-font-family;
+  padding-left: 2.5rem;
 }
 
 .modalTitletxt {
   font-weight: $main-font-weight;
-  font-family: $main-font-family;
+  text-align: left;
   font-size: $modal-title-txt-size;
+  max-width: 80%;
+  padding-left: 2.5rem;
+  padding-bottom: 1.5rem;
+  padding-right: 2.563rem;
 }

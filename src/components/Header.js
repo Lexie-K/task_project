@@ -3,14 +3,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styles from '@/styles/Home.module.scss';
 
-const Header = ({ filter }) => {
-  const { data } = useSelector(state => state.posts);
+const Header = () => {
   const filteredItems = useSelector(applicationSelector);
 
   return (
     <div>
       <h1 className={styles.header}>
-        Заголовок
+        Заголовок&thinsp;
         <p className={styles.counter}>({filteredItems.length})</p>
       </h1>
     </div>

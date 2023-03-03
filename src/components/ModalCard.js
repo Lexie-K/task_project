@@ -19,12 +19,12 @@ const style = {
   boxShadow: 100,
   border: 'none',
   borderRadius: 'none',
-  p: 4,
+  fontFamily: '--montserrat-font',
   overflow: 'auto',
-  '@media(max-width:768px)' : {
+  '@media(max-width:768px)': {
     minWidth: '100%',
     minHeight: '100%',
-  }
+  },
 };
 
 const ModalWindow = ({
@@ -43,15 +43,12 @@ const ModalWindow = ({
   const dispatch = useDispatch();
   const { isOpen } = useSelector(state => state.posts);
   const router = useRouter();
-  
- 
 
   const handleClose = () => {
     if (isOpen === false) dispatch(closeModal);
     router.push('');
   };
 
- 
   return (
     <div>
       <Button
@@ -64,12 +61,15 @@ const ModalWindow = ({
         open={id === selectedId}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        
       >
         <Box sx={style}>
           <div onClick={handleClose} className={styles.closeBtnModal}>
             {' '}
-            <CloseIcon fontSize="large" />{' '}
+            <CloseIcon
+              fontSize="large"
+              stroke="rgba(229, 229, 229, 1)"
+              strokeWidth="1"
+            />{' '}
           </div>
 
           <div className={styles.modalApplicationTitle}>{application}</div>
@@ -90,35 +90,35 @@ const ModalWindow = ({
             </Typography>
           )}
           <div className={styles.modalTitletxt}>{title}</div>
-          
-            <div className={styles.modalHiddenContainer}>
-              {object ? (
-                <Typography>
-                  ОБЪЕКТ ВНЕДРЕНИЯ
-                  <div className={styles.modalHiddentxt}>{object}</div>
-                </Typography>
-              ) : undefined}
 
-              {solution ? (
-                <Typography>
-                  ПРИМЕНЯЕМОЕ РЕШЕНЕИЕ
-                  <div className={styles.modalHiddentxt}>
-                    {solution.description}
-                  </div>
-                </Typography>
-              ) : undefined}
-              {developer ? (
-                <Typography>
-                  РАЗРАБОТЧИК
-                  <div className={styles.modalHiddentxt}>{developer}</div>
-                </Typography>
-              ) : undefined}
-            </div>
-            <div className={styles.modalHiddenDescripTitle}>ОПИСАНИЕ</div>
-            <div className={styles.modalHiddenDescriptxt} dangerouslySetInnerHTML={{__html:description}}>
-        
-              </div>
-          
+          <div className={styles.modalHiddenContainer}>
+            {object ? (
+              <Typography className={styles.modalTitleObj}>
+                ОБЪЕКТ ВНЕДРЕНИЯ
+                <div className={styles.modalHiddentxt}>{object}</div>
+              </Typography>
+            ) : undefined}
+
+            {solution ? (
+              <Typography className={styles.modalTitleSolution}>
+                ПРИМЕНЯЕМОЕ РЕШЕНЕИЕ
+                <div className={styles.modalHiddentxt}>
+                  {solution.description}
+                </div>
+              </Typography>
+            ) : undefined}
+            {developer ? (
+              <Typography>
+                РАЗРАБОТЧИК
+                <div className={styles.modalHiddentxt}>{developer}</div>
+              </Typography>
+            ) : undefined}
+          </div>
+          <div className={styles.modalHiddenDescripTitle}>ОПИСАНИЕ</div>
+          <div
+            className={styles.modalHiddenDescriptxt}
+            dangerouslySetInnerHTML={{ __html: description }}
+          ></div>
         </Box>
       </Modal>
     </div>

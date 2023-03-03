@@ -17,6 +17,9 @@ const postSlice = createSlice({
         ...action.payload,
       ];
     },
+    removeApplication (state, action) {
+      state.selectedApplications = state.selectedApplications.filter((el) => el !== action.payload)
+    },
     resetApplication(state, action) {
       state.selectedApplications = [];
     },
@@ -24,7 +27,7 @@ const postSlice = createSlice({
 });
 
 // Extract and export each action creator by name
-export const { selectApplication, resetApplication } = postSlice.actions;
+export const { selectApplication, resetApplication, removeApplication } = postSlice.actions;
 // Export the reducer, either as a default or named export
 export default postSlice.reducer;
 

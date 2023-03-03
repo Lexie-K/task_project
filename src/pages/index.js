@@ -4,7 +4,7 @@ import CardsLayout from '@/components/CardsLayout';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import {
-  applicationSelector,
+  removeApplication,
   resetApplication,
   selectApplication,
 } from '@/store/postSlice';
@@ -14,12 +14,13 @@ import data from '../data/data.json';
 import { useTransition } from 'react';
 import styles from '@/styles/Home.module.scss';
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home({ data }) {
   const [filter, setFilter] = useState(false);
   const [currentFilter, setCurrentFilter] = useState('');
   const [isPending, startTransition] = useTransition();
-  // const data = useSelector(applicationSelector);
+
   const selectedApplications = useSelector(
     state => state.posts.selectedApplications
   );
@@ -28,16 +29,33 @@ export default function Home({ data }) {
 
   const dispatch = useDispatch();
 
-  const applicationChangeHandler = application => {
-    setCurrentFilter(application);
-    router.push({
-      pathname: router.pathname,
-      query: { application: [...selectedApplications, application].join(',') },
-    });
+  const applicationChangeHandler = (application, isActive) => {
+    if (!isActive) {
+      setCurrentFilter(application);
 
-    startTransition(() => dispatch(selectApplication([application])));
-    setFilter(true);
+      startTransition(() => dispatch(selectApplication([application])));
+      setFilter(true);
+    } else {
+      dispatch(removeApplication(application));
+    }
   };
+
+  useEffect(() => {
+    if (selectedApplications.length > 0) {
+      router.push({
+        pathname: router.pathname,
+        query: {
+          application: selectedApplications.join(','),
+        },
+      });
+    } else {
+      router.push({
+        pathname: router.pathname,
+        query: undefined,
+      });
+    }
+  }, [selectedApplications]);
+
   const applicationResetHandler = application => {
     startTransition(() => dispatch(resetApplication(application)));
   };
@@ -49,6 +67,7 @@ export default function Home({ data }) {
       </Head>
 
       <Header filter={filter} />
+
       <FilterCategory
         currentFilter={currentFilter}
         applicationChangeHandler={applicationChangeHandler}
@@ -62,8 +81,9 @@ export default function Home({ data }) {
 
 export const getStaticProps = async context => {
   const params = new URLSearchParams(
-    global.window ? window.document.location.search : undefined
+    typeof window !== 'undefined' ? window.document.location.search : undefined
   );
+
   const applications = params.get('application');
   if (applications) {
     dispatch(selectApplication(applications.split(',')));
