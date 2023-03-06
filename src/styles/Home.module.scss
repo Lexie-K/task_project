@@ -71,8 +71,8 @@ $bp-phone: 320px;
 
 .main_container {
   background-color: $main-bk-ground;
-  padding: 2.5rem 3.75rem 1rem 4.75rem;
-  margin: 4rem 5.125rem 1rem 2.6875rem;
+  padding: 1.5rem 3.75rem 0.2rem 4.75rem;
+  margin: 1.5rem 5.125rem 0.2rem 2.6875rem;
   border-radius: 1.8rem;
   min-width: 25rem;
 }
@@ -97,6 +97,8 @@ $bp-phone: 320px;
   background: none;
   border: none;
   cursor: pointer;
+  font-family: '--montserrat-font', sans-serif;
+  font-weight: bold;
 }
 
 .showBtn {
@@ -145,18 +147,9 @@ $bp-phone: 320px;
   float: right;
 }
 
-.modalLink {
-  padding-left: 0px;
-  color: $modal-link-color;
-  font-size: $modal-link-size;
-  font-weight: $main-font-weight;
-  display: flex;
-}
-
 .countryCityTitle {
   color: $city-country-txt-color;
-  font-weight: $main-font-weight;
-  font-style: $main-font-style;
+  font-weight: bold;
 }
 
 .titleStyle {
@@ -178,7 +171,9 @@ $bp-phone: 320px;
   color: $main-txt-color;
   font-size: $btnshow-font-size;
   font-weight: $main-font-weight;
+  font-family: '--montserrat-font', sans-serif;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .uniksBtnsFocus {
@@ -274,7 +269,7 @@ $bp-phone: 320px;
   margin-top: 2.5rem;
   margin-left: 2.5rem;
   font-size: $modal-hidden-txt-size;
-  font-weight: $main-font-weight;
+  font-weight: bold;
 }
 
 .modalCountryCity {
@@ -292,4 +287,13 @@ $bp-phone: 320px;
   padding-left: 2.5rem;
   padding-bottom: 1.5rem;
   padding-right: 2.563rem;
+}
+
+.modalLink {
+  padding-left: 0px;
+  color: $modal-link-color;
+  font-size: $modal-link-size;
+  font-weight: $main-font-weight;
+  cursor: pointer;
+  align-self: flex-end;
 }

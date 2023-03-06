@@ -9,12 +9,14 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-position-x: 60%;
+
   background-color: rgba(35, 35, 35, 1);
   font-family: '--montserrat-font', sans-serif;
 }
 
 .MuiTypography-root {
   font-family: '--montserrat-font', sans-serif;
+  font-weight: bold;
 }
 
 .MuiButtonBase-root-MuiButton-root {
@@ -23,4 +25,9 @@ body {
 
 .MuiBox-root {
   font-family: '--montserrat-font', sans-serif;
+}
+
+.MuiButtonBase-root {
+  font-family: '--montserrat-font', sans-serif;
+  font-weight: bold;
 }

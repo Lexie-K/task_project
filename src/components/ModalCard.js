@@ -57,6 +57,7 @@ const ModalWindow = ({
       >
         Посмотреть
       </Button>
+
       <Modal
         open={id === selectedId}
         aria-labelledby="modal-modal-title"
