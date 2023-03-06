@@ -14,7 +14,6 @@ import data from '../data/data.json';
 import { useTransition } from 'react';
 import styles from '@/styles/Home.module.scss';
 import Head from 'next/head';
-import Link from 'next/link';
 
 export default function Home({ data }) {
   const [filter, setFilter] = useState(false);

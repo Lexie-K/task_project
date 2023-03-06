@@ -20,7 +20,7 @@ $modal-title-txt-size: 1.75rem;
 $btnreset-font-size: 0.625rem;
 $date-font-weight: 500;
 $main-font-weight: 700;
-$modal-hidden-font-weight: 400;
+$modal-hidden-font-weight: 300;
 $header-font-size: 2.25rem;
 $counter-font-size: 1.75rem;
 $btnshow-bk-ground: rgba(59, 59, 59, 1);
@@ -71,8 +71,8 @@ $bp-phone: 320px;
 
 .main_container {
   background-color: $main-bk-ground;
-  padding: 1.5rem 3.75rem 0.2rem 4.75rem;
-  margin: 1.5rem 5.125rem 0.2rem 2.6875rem;
+  padding: 2rem 3.75rem 0.2rem 4.75rem;
+  margin: 2rem 5.125rem 0.2rem 2.6875rem;
   border-radius: 1.8rem;
   min-width: 25rem;
 }

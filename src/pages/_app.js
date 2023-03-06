@@ -3,19 +3,19 @@ import store from '@/store/store';
 import { Provider } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { Montserrat } from '@next/font/google';
-import { CacheProvider } from '@emotion/react';
-import createEmotionCache from '../config/createEmotionCache';
-import CssBaseline from '@mui/material/CssBaseline';
+// import { CacheProvider } from '@emotion/react';
+// import createEmotionCache from '../config/createEmotionCache';
+// import CssBaseline from '@mui/material/CssBaseline';
 
 const montserrat = Montserrat({
   variable: '--montserrat-font',
   subsets: ['cyrillic'],
 });
-const clientSideEmotionCache = createEmotionCache();
+// const clientSideEmotionCache = createEmotionCache();
 
 export default function App({
   Component,
-  emotionCache = clientSideEmotionCache,
+  // emotionCache = clientSideEmotionCache,
   pageProps,
 }) {
   const theme = createTheme({
@@ -30,15 +30,16 @@ export default function App({
   });
 
   return (
-    <CacheProvider value={emotionCache}>
+    // <CacheProvider value={emotionCache}>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <main className={montserrat.className}>
-            <CssBaseline />
+            {/* <CssBaseline/> */}
             <Component {...pageProps} />
+            
           </main>
         </ThemeProvider>
       </Provider>
-    </CacheProvider>
+    // </CacheProvider>
   );
 }
