@@ -77,6 +77,15 @@ $bp-phone: 320px;
   min-width: 25rem;
 }
 
+.modalLink {
+  padding-left: 0px;
+  color: $modal-link-color;
+  font-size: $modal-link-size;
+  font-weight: $main-font-weight;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
 @media (max-width: $bp-phone) {
   .main_container {
     background-color: $main-bk-ground;
@@ -289,11 +298,4 @@ $bp-phone: 320px;
   padding-right: 2.563rem;
 }
 
-.modalLink {
-  padding-left: 0px;
-  color: $modal-link-color;
-  font-size: $modal-link-size;
-  font-weight: $main-font-weight;
-  cursor: pointer;
-  align-self: flex-end;
-}
+

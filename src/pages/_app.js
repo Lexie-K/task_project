@@ -1,21 +1,22 @@
 import styles from '@/styles/globals.css';
-import store from '@/store/store';
+import store, { persistor } from '@/store/store';
 import { Provider } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { Montserrat } from '@next/font/google';
-// import { CacheProvider } from '@emotion/react';
-// import createEmotionCache from '../config/createEmotionCache';
-// import CssBaseline from '@mui/material/CssBaseline';
+import { PersistGate } from 'redux-persist/integration/react';
+import { CacheProvider } from '@emotion/react';
+import createEmotionCache from '../config/createEmotionCache';
+import { persistStore } from 'redux-persist';
 
 const montserrat = Montserrat({
   variable: '--montserrat-font',
   subsets: ['cyrillic'],
 });
-// const clientSideEmotionCache = createEmotionCache();
+const clientSideEmotionCache = createEmotionCache();
 
 export default function App({
   Component,
-  // emotionCache = clientSideEmotionCache,
+  emotionCache = clientSideEmotionCache,
   pageProps,
 }) {
   const theme = createTheme({
@@ -30,16 +31,16 @@ export default function App({
   });
 
   return (
-    // <CacheProvider value={emotionCache}>
+    <CacheProvider value={emotionCache}>
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <main className={montserrat.className}>
-            {/* <CssBaseline/> */}
-            <Component {...pageProps} />
-            
-          </main>
-        </ThemeProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <main className={montserrat.className}>
+              <Component {...pageProps} />
+            </main>
+          </ThemeProvider>
+        </PersistGate>
       </Provider>
-    // </CacheProvider>
+    </CacheProvider>
   );
 }

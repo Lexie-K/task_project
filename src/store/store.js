@@ -1,14 +1,40 @@
 import { configureStore, ConfigureStoreOptions } from '@reduxjs/toolkit';
 import postsReducer from './postSlice';
 import modalReducer from './modalSlice';
+import storage from 'redux-persist/lib/storage';
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import { combineReducers } from '@reduxjs/toolkit';
 
-export const createStore = options =>
-  configureStore({
-    reducer: {
-      posts: postsReducer,
-      modal: modalReducer,
-    },
-  });
+const persistConfig = {
+  key: 'root',
+  storage,
+};
 
-export const store = createStore();
+const rootReducer = combineReducers({
+  posts: postsReducer,
+  modal: modalReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
+
+export const persistor = persistStore(store);
 export default store;
