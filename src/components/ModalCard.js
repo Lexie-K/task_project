@@ -7,6 +7,8 @@ import Modal from '@mui/material/Modal';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '@/styles/Home.module.scss';
+import { openModal } from '@/store/modalSlice';
+import { closeModal } from '@/store/modalSlice';
 
 const style = {
   position: 'absolute',
@@ -38,27 +40,30 @@ const ModalWindow = ({
   object,
   solution,
   developer,
-  closeModal,
 }) => {
   const dispatch = useDispatch();
-  const { isOpen } = useSelector(state => state.posts);
+  
   const router = useRouter();
-
+ 
+  const { isOpen } = useSelector(state => state.modal);
+  
   const handleClose = () => {
-    if (isOpen === false) dispatch(closeModal);
+    dispatch(closeModal());
     router.push('');
+  };
+
+  const handleOpen = () => {
+    dispatch(openModal());
+    router.push(`?id=${id}`);
   };
 
   return (
     <div>
-      <Button
-        className={styles.modalLink}
-        onClick={() => router.push(`?id=${id}`)}
-      >
+      <Button className={styles.modalLink} onClick={handleOpen}>
         Посмотреть
       </Button>
 
-      <Modal
+      {isOpen && <Modal
         open={id === selectedId}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -122,6 +127,7 @@ const ModalWindow = ({
           ></div>
         </Box>
       </Modal>
+     }
     </div>
   );
 };

@@ -22,4 +22,4 @@ export const { openModal, closeModal } = modalSlice.actions;
 // Export the reducer, either as a default or named export
 export default modalSlice.reducer;
 
-export const selectData = state => state.posts.data;
+// export const selectData = state => state.posts.data;

@@ -1,6 +1,6 @@
 import { configureStore, ConfigureStoreOptions } from '@reduxjs/toolkit';
-import postsReducer from './postSlice';
-import modalReducer from './modalSlice';
+import postsReducer from '@/store/postSlice';
+import modalReducer from '@/store/modalSlice'
 import storage from 'redux-persist/lib/storage';
 import {
   persistReducer,

@@ -47,7 +47,7 @@ export default function Home({ data }) {
           application: selectedApplications.join(','),
         },
       });
-    } else {
+    } if (selectedApplications.length == 0) {
       router.push({
         pathname: router.pathname,
         query: undefined,
